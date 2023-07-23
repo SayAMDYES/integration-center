@@ -1,5 +1,6 @@
 package org.quasar.ic.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -11,6 +12,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ICResponse<T> {
     public static final Integer SUCCESS_CODE = 0;
     public static final String SUCCESS_MESSAGE = "success";
