@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     public Object process(Throwable ignored) {
-        return new ResponseEntity<>(ICResponse.fail(ICExceptionEnum.ILLEGAL_API_ARGUMENT.getCode(), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getMessage()), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getHttpStatus());
+        return new ResponseEntity<>(new ICResponse<>().fail(ICExceptionEnum.ILLEGAL_API_ARGUMENT.getCode(), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getMessage()), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getHttpStatus());
     }
 
     @ExceptionHandler(ICException.class)
     public Object process(ICException e) {
-        return new ResponseEntity<>(ICResponse.fail(e.getCode(), e.getMessage()), e.getHttpStatus());
+        return new ResponseEntity<>(new ICResponse<>().fail(e.getCode(), e.getMessage()), e.getHttpStatus());
     }
 }

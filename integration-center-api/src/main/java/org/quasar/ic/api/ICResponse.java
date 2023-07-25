@@ -36,7 +36,7 @@ public class ICResponse<T, R extends ICResponse<T, R>> {
     private T data;
 
     @SuppressWarnings("unchecked")
-    public <R> R success(T data) {
+    public R success(T data) {
         return (R) this.setCode(SUCCESS_CODE)
                 .setMessage(SUCCESS_MESSAGE)
                 .setData(data);
