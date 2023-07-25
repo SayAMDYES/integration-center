@@ -99,6 +99,11 @@ public class Commodity extends IEntity {
         return this;
     }
 
+    public Commodity removeAllDeliveryType() {
+        this.deliveryType.clear();
+        return this;
+    }
+
     public CommodityStatus getStatus() {
         return status;
     }
