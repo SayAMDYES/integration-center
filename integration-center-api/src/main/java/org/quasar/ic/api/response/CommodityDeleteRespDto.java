@@ -11,5 +11,5 @@ import org.quasar.ic.api.ICResponse;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CommodityDeleteRespDto extends ICResponse<Void> {
+public class CommodityDeleteRespDto extends ICResponse<Void, CommodityDeleteRespDto> {
 }

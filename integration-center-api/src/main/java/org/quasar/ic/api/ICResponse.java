@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ICResponse<T> {
+public class ICResponse<T, R extends ICResponse<T, R>> {
     public static final Integer SUCCESS_CODE = 0;
     public static final String SUCCESS_MESSAGE = "success";
 
@@ -36,28 +36,25 @@ public class ICResponse<T> {
     private T data;
 
     @SuppressWarnings("unchecked")
-    public static <T> ICResponse<T> success(T data) {
-        return (ICResponse<T>) new ICResponse<>()
-                .setCode(SUCCESS_CODE)
+    public <R> R success(T data) {
+        return (R) this.setCode(SUCCESS_CODE)
                 .setMessage(SUCCESS_MESSAGE)
                 .setData(data);
     }
 
-    public static <T> ICResponse<T> success() {
+    public R success() {
         return success(SUCCESS_MESSAGE);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> ICResponse<T> success(String message) {
-        return (ICResponse<T>) new ICResponse<>()
-                .setCode(SUCCESS_CODE)
+    public R success(String message) {
+        return (R) this.setCode(SUCCESS_CODE)
                 .setMessage(message);
     }
 
     @SuppressWarnings("unchecked")
-    public static <T> ICResponse<T> fail(Integer code, String message) {
-        return (ICResponse<T>) new ICResponse<>()
-                .setCode(code)
+    public R fail(Integer code, String message) {
+        return (R) this.setCode(code)
                 .setMessage(message);
     }
 }

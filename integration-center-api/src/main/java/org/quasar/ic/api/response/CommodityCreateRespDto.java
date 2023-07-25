@@ -12,5 +12,5 @@ import org.quasar.ic.api.common.CommodityDto;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CommodityCreateRespDto extends ICResponse<CommodityDto> {
+public class CommodityCreateRespDto extends ICResponse<CommodityDto, CommodityCreateRespDto> {
 }

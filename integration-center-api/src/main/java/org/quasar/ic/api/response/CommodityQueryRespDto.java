@@ -13,5 +13,5 @@ import org.quasar.ic.api.common.PageResult;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CommodityQueryRespDto extends ICResponse<PageResult<CommodityDto>> {
+public class CommodityQueryRespDto extends ICResponse<PageResult<CommodityDto>, CommodityQueryRespDto> {
 }
