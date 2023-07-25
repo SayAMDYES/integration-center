@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
  * @since 2023/7/23 17:29
  */
 public enum ICExceptionEnum {
+    ILLEGAL_API_ARGUMENT(400, "Illegal API Argument", HttpStatus.BAD_REQUEST),
+    NOT_FOUND(404, "Not Found", HttpStatus.NOT_FOUND),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR),
-    ILLEGAL_API_ARGUMENT(400, "Illegal API Argument", HttpStatus.BAD_REQUEST);
+    ;
 
     ICExceptionEnum(Integer code, String message, HttpStatus httpStatus) {
         this.code = code;
