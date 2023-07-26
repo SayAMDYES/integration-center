@@ -8,13 +8,14 @@ import org.quasar.ic.api.response.CommodityCreateRespDto;
 import org.quasar.ic.api.response.CommodityDeleteRespDto;
 import org.quasar.ic.api.response.CommodityQueryRespDto;
 import org.quasar.ic.api.response.CommodityUpdateRespDto;
+import org.quasar.ic.common.application.service.IApplicationService;
 
 /**
  * @author Quasar
  * @version 1.0.0
  * @since 2023/7/25 23:45
  */
-public interface CommodityService {
+public interface ICommodityApplicationService extends IApplicationService {
     CommodityQueryRespDto queryCommodity(CommodityQueryReqDto reqDto);
 
     CommodityCreateRespDto createCommodity(CommodityCreateReqDto reqDto);

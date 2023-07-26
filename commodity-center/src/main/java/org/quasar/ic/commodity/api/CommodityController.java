@@ -11,7 +11,7 @@ import org.quasar.ic.api.response.CommodityCreateRespDto;
 import org.quasar.ic.api.response.CommodityDeleteRespDto;
 import org.quasar.ic.api.response.CommodityQueryRespDto;
 import org.quasar.ic.api.response.CommodityUpdateRespDto;
-import org.quasar.ic.commodity.application.service.CommodityService;
+import org.quasar.ic.commodity.application.service.ICommodityApplicationService;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,33 +19,34 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0.0
  * @since 2023/7/23 16:55
  */
-@Tag(name = "Commodity API")
+@Tag(name = "CommodityManagement", description = "Commodity Center API")
+@RequestMapping("/api/v1/commodity-center")
 @RestController
 @RequiredArgsConstructor
 public class CommodityController {
-    private final CommodityService commodityService;
+    private final ICommodityApplicationService commodityApplicationService;
 
     @Operation(summary = "Query Commodity")
     @PostMapping("/commodity/query")
     public CommodityQueryRespDto queryCommodity(@RequestBody CommodityQueryReqDto reqDto) {
-        return commodityService.queryCommodity(reqDto);
+        return commodityApplicationService.queryCommodity(reqDto);
     }
 
     @Operation(summary = "Create Commodity")
     @PostMapping("/commodity")
     public CommodityCreateRespDto createCommodity(@RequestBody CommodityCreateReqDto reqDto) {
-        return commodityService.createCommodity(reqDto);
+        return commodityApplicationService.createCommodity(reqDto);
     }
 
     @Operation(summary = "Update Commodity")
     @PutMapping("/commodity")
     public CommodityUpdateRespDto updateCommodity(@RequestBody CommodityUpdateReqDto reqDto) {
-        return commodityService.updateCommodity(reqDto);
+        return commodityApplicationService.updateCommodity(reqDto);
     }
 
     @Operation(summary = "Delete Commodity")
     @DeleteMapping("/commodity")
     public CommodityDeleteRespDto deleteCommodity(@RequestBody CommodityDeleteReqDto reqDto) {
-        return commodityService.deleteCommodity(reqDto);
+        return commodityApplicationService.deleteCommodity(reqDto);
     }
 }

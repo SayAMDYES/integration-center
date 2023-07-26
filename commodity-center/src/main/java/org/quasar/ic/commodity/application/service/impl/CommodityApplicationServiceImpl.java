@@ -1,6 +1,8 @@
 package org.quasar.ic.commodity.application.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
+import org.quasar.ic.api.common.CommodityDto;
 import org.quasar.ic.api.request.CommodityCreateReqDto;
 import org.quasar.ic.api.request.CommodityDeleteReqDto;
 import org.quasar.ic.api.request.CommodityQueryReqDto;
@@ -10,11 +12,16 @@ import org.quasar.ic.api.response.CommodityDeleteRespDto;
 import org.quasar.ic.api.response.CommodityQueryRespDto;
 import org.quasar.ic.api.response.CommodityUpdateRespDto;
 import org.quasar.ic.commodity.api.converter.CommodityConverter;
-import org.quasar.ic.commodity.application.service.CommodityService;
+import org.quasar.ic.commodity.application.service.ICommodityApplicationService;
 import org.quasar.ic.commodity.domain.entity.Commodity;
 import org.quasar.ic.commodity.domain.entity.ICommodityFactory;
+import org.quasar.ic.commodity.infrastructure.po.CommodityPo;
+import org.quasar.ic.commodity.infrastructure.query.ICommodityQuery;
+import org.quasar.ic.common.application.converter.BasePoPageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  * @author Quasar
@@ -23,14 +30,25 @@ import org.springframework.util.CollectionUtils;
  */
 @Service
 @RequiredArgsConstructor
-public class CommodityServiceImpl implements CommodityService {
+public class CommodityApplicationServiceImpl implements ICommodityApplicationService {
+    private final ICommodityQuery commodityQuery;
+
     private final ICommodityFactory commodityFactory;
 
     private final CommodityConverter commodityConverter;
+    private final BasePoPageConverter<CommodityPo, CommodityDto> pageConverter;
 
     @Override
     public CommodityQueryRespDto queryCommodity(CommodityQueryReqDto reqDto) {
-        return null;
+        Page<CommodityPo> commodityPoPage = commodityQuery.findAll(new ICommodityQuery.CommodityQueryOption(reqDto.getCurrentPage(), reqDto.getPageSize())
+                .setName(reqDto.getName())
+                .setDeliveryTypes(List.of(reqDto.getDeliveryType()))
+                .setStatuses(List.of(reqDto.getStatus()))
+                .setStartCreateTime(reqDto.getStartCreateTime())
+                .setEndCreateTime(reqDto.getEndCreateTime()));
+
+        return new CommodityQueryRespDto()
+                .success(pageConverter.convert(commodityPoPage));
     }
 
     @Override
