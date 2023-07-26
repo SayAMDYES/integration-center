@@ -3,6 +3,7 @@ package org.quasar.ic.api.common;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -13,7 +14,12 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Accessors(chain = true)
 public class PageResult<T> extends BasePage {
+    public PageResult(Integer currentPage, Integer pageSize) {
+        super(currentPage, pageSize);
+    }
+
     @Schema(description = "total count")
     private Long totalCount;
 

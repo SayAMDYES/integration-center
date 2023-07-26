@@ -2,6 +2,7 @@ package org.quasar.ic.api.common;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @since 2023/7/22 18:13
  */
 @Data
+@Accessors(chain = true)
 public class CommodityDto {
     /**
      * commodity id

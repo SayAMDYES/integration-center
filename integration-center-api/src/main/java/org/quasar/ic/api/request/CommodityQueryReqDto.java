@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.quasar.ic.api.ICPageReqDto;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -38,4 +39,18 @@ public class CommodityQueryReqDto extends ICPageReqDto {
      */
     @Schema(description = "create time", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> createTime;
+
+    public String getStartCreateTime() {
+        if (CollectionUtils.isEmpty(createTime)) {
+            return null;
+        }
+        return createTime.get(0);
+    }
+
+    public String getEndCreateTime() {
+        if (CollectionUtils.isEmpty(createTime) || createTime.size() < 2) {
+            return null;
+        }
+        return createTime.get(1);
+    }
 }
