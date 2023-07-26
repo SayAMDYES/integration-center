@@ -2,7 +2,10 @@ package org.quasar.ic.commodity.infrastructure.repository.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.quasar.ic.commodity.infrastructure.po.CommodityPo;
+import org.quasar.ic.commodity.infrastructure.query.ICommodityQuery;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Quasar
@@ -11,4 +14,5 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface CommodityMapper extends BaseMapper<CommodityPo> {
+    List<CommodityPo> selectAllByOption(ICommodityQuery.CommodityQueryOption option);
 }
