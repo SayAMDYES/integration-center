@@ -1,4 +1,4 @@
-package org.quasar.ic.common.infrastructure.repository;
+package org.quasar.ic.common.infrastructure;
 
 import lombok.Data;
 

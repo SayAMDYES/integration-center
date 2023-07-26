@@ -1,5 +1,7 @@
 package org.quasar.ic.common.exception.handler;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.quasar.ic.api.ICResponse;
 import org.quasar.ic.common.exception.ICException;
 import org.quasar.ic.common.exception.ICExceptionEnum;
@@ -14,9 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Log log = LogFactory.getLog(GlobalExceptionHandler.class);
+
     @ExceptionHandler(Throwable.class)
     public Object process(Throwable ignored) {
-        return new ResponseEntity<>(new ICResponse<>().fail(ICExceptionEnum.ILLEGAL_API_ARGUMENT.getCode(), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getMessage()), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getHttpStatus());
+        log.error(ignored.getMessage(), ignored);
+        return new ResponseEntity<>(new ICResponse<>().fail(ICExceptionEnum.INTERNAL_SERVER_ERROR.getCode(), ICExceptionEnum.INTERNAL_SERVER_ERROR.getMessage()), ICExceptionEnum.INTERNAL_SERVER_ERROR.getHttpStatus());
     }
 
     @ExceptionHandler(ICException.class)
