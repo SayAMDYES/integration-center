@@ -3,7 +3,8 @@ package org.quasar.ic.commodity.domain.entity;
 import lombok.RequiredArgsConstructor;
 import org.quasar.ic.api.request.CommodityCreateReqDto;
 import org.quasar.ic.commodity.infrastructure.po.CommodityPo;
-import org.quasar.ic.commodity.infrastructure.repository.CommodityRepository;
+import org.quasar.ic.commodity.infrastructure.query.ICommodityQuery;
+import org.quasar.ic.commodity.infrastructure.repository.ICommodityRepository;
 import org.quasar.ic.common.exception.ICException;
 import org.quasar.ic.common.exception.ICExceptionEnum;
 import org.springframework.stereotype.Component;
@@ -18,11 +19,13 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CommodityFactoryImpl implements ICommodityFactory {
-    private final CommodityRepository commodityRepository;
+    private final ICommodityQuery commodityQuery;
+
+    private final ICommodityRepository commodityRepository;
 
     @Override
     public Commodity create(Long id) {
-        Optional<CommodityPo> commodityPo = commodityRepository.find(id);
+        Optional<CommodityPo> commodityPo = commodityQuery.find(id);
         if (commodityPo.isEmpty()) {
             throw new ICException(ICExceptionEnum.NOT_FOUND, "Commodity not found");
         }

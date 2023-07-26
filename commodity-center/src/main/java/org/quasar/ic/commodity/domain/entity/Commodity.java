@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.quasar.ic.commodity.infrastructure.po.CommodityPo;
-import org.quasar.ic.commodity.infrastructure.repository.CommodityRepository;
+import org.quasar.ic.commodity.infrastructure.repository.ICommodityRepository;
 import org.quasar.ic.common.domain.constant.IEnum;
 import org.quasar.ic.common.domain.entity.IEntity;
 import org.springframework.util.StringUtils;
@@ -22,12 +22,12 @@ import java.util.Set;
  */
 @Accessors(chain = true)
 public class Commodity extends IEntity {
-    public Commodity(CommodityRepository commodityRepository, Long id) {
+    public Commodity(ICommodityRepository commodityRepository, Long id) {
         this.commodityRepository = commodityRepository;
         this.id = id;
     }
 
-    private final CommodityRepository commodityRepository;
+    private final ICommodityRepository commodityRepository;
     @Getter
     private final Long id;
     @Getter
