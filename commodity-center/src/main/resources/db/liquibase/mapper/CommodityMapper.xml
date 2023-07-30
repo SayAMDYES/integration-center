@@ -4,18 +4,18 @@
 <mapper namespace="org.quasar.ic.commodity.infrastructure.repository.mapper.CommodityMapper">
     <select id="selectAllByOption" resultType="org.quasar.ic.commodity.infrastructure.po.CommodityPo">
         select id,
-        name,
-        price,
-        description,
-        image,
-        stock,
-        delivery_type,
-        status,
-        create_time,
-        update_time
+               name,
+               price,
+               description,
+               image,
+               stock,
+               delivery_type,
+               status,
+               create_time,
+               update_time
         from t_commodity
         where 1 = 1
-        <if test="name != null and name != ''">
+            <if test="name != null and name != ''">
                 and name like concat('%', #{name}, '%')
             </if>
             <if test="deliveryTypes != null and deliveryTypes.size() > 0">
