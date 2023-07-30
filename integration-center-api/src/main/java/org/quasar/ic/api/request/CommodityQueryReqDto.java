@@ -1,6 +1,7 @@
 package org.quasar.ic.api.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.quasar.ic.api.ICPageReqDto;
@@ -31,12 +32,14 @@ public class CommodityQueryReqDto extends ICPageReqDto {
     /**
      * commodity status
      */
+
     @Schema(description = "commodity status", requiredMode = Schema.RequiredMode.NOT_REQUIRED, allowableValues = {"0", "1", "2", "3"})
     private Integer status;
 
     /**
      * create time
      */
+    @Size(max = 2)
     @Schema(description = "create time", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     private List<String> createTime;
 

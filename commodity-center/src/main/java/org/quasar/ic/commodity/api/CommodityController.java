@@ -2,6 +2,7 @@ package org.quasar.ic.commodity.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.quasar.ic.api.request.CommodityCreateReqDto;
 import org.quasar.ic.api.request.CommodityDeleteReqDto;
@@ -28,25 +29,25 @@ public class CommodityController {
 
     @Operation(summary = "Query Commodity")
     @PostMapping("/commodity/query")
-    public CommodityQueryRespDto queryCommodity(@RequestBody CommodityQueryReqDto reqDto) {
+    public CommodityQueryRespDto queryCommodity(@Valid @RequestBody CommodityQueryReqDto reqDto) {
         return commodityApplicationService.queryCommodity(reqDto);
     }
 
     @Operation(summary = "Create Commodity")
     @PostMapping("/commodity")
-    public CommodityCreateRespDto createCommodity(@RequestBody CommodityCreateReqDto reqDto) {
+    public CommodityCreateRespDto createCommodity(@Valid @RequestBody CommodityCreateReqDto reqDto) {
         return commodityApplicationService.createCommodity(reqDto);
     }
 
     @Operation(summary = "Update Commodity")
     @PutMapping("/commodity")
-    public CommodityUpdateRespDto updateCommodity(@RequestBody CommodityUpdateReqDto reqDto) {
+    public CommodityUpdateRespDto updateCommodity(@Valid @RequestBody CommodityUpdateReqDto reqDto) {
         return commodityApplicationService.updateCommodity(reqDto);
     }
 
     @Operation(summary = "Delete Commodity")
     @DeleteMapping("/commodity")
-    public CommodityDeleteRespDto deleteCommodity(@RequestBody CommodityDeleteReqDto reqDto) {
+    public CommodityDeleteRespDto deleteCommodity(@Valid @RequestBody CommodityDeleteReqDto reqDto) {
         return commodityApplicationService.deleteCommodity(reqDto);
     }
 }

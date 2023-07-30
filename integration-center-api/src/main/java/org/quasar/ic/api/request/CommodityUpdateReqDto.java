@@ -1,6 +1,7 @@
 package org.quasar.ic.api.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ public class CommodityUpdateReqDto {
     /**
      * commodity id
      */
+    @NotNull(message = "commodity id cannot be null")
     @Schema(description = "commodity id", requiredMode = Schema.RequiredMode.REQUIRED)
     private Long id;
 
