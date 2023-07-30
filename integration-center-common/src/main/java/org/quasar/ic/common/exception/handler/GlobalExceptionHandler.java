@@ -6,6 +6,7 @@ import org.quasar.ic.api.ICResponse;
 import org.quasar.ic.common.exception.ICException;
 import org.quasar.ic.common.exception.ICExceptionEnum;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -22,6 +23,11 @@ public class GlobalExceptionHandler {
     public Object process(Throwable ignored) {
         log.error(ignored.getMessage(), ignored);
         return new ResponseEntity<>(new ICResponse<>().fail(ICExceptionEnum.INTERNAL_SERVER_ERROR.getCode(), ICExceptionEnum.INTERNAL_SERVER_ERROR.getMessage()), ICExceptionEnum.INTERNAL_SERVER_ERROR.getHttpStatus());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Object process(MethodArgumentNotValidException e) {
+        return new ResponseEntity<>(new ICResponse<>().fail(ICExceptionEnum.ILLEGAL_API_ARGUMENT.getCode(), e.getBindingResult().getFieldError().getDefaultMessage()), ICExceptionEnum.ILLEGAL_API_ARGUMENT.getHttpStatus());
     }
 
     @ExceptionHandler(ICException.class)
