@@ -1,7 +1,9 @@
-package org.quasar.ic.common.infrastructure.po.external;
+package org.quasar.ic.common.infrastructure.po.extension;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedJdbcTypes;
+import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.*;
 import java.util.Collections;
@@ -12,6 +14,8 @@ import java.util.List;
  * @version 1.0.0
  * @since 2023/7/26 21:54
  */
+@MappedJdbcTypes(JdbcType.ARRAY)
+@MappedTypes(List.class)
 public class ListOfIntegerTypeHandler extends BaseTypeHandler<List<Integer>> {
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, List<Integer> integers, JdbcType jdbcType) throws SQLException {
