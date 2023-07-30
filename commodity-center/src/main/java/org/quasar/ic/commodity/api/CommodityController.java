@@ -8,10 +8,7 @@ import org.quasar.ic.api.request.CommodityCreateReqDto;
 import org.quasar.ic.api.request.CommodityDeleteReqDto;
 import org.quasar.ic.api.request.CommodityQueryReqDto;
 import org.quasar.ic.api.request.CommodityUpdateReqDto;
-import org.quasar.ic.api.response.CommodityCreateRespDto;
-import org.quasar.ic.api.response.CommodityDeleteRespDto;
-import org.quasar.ic.api.response.CommodityQueryRespDto;
-import org.quasar.ic.api.response.CommodityUpdateRespDto;
+import org.quasar.ic.api.response.*;
 import org.quasar.ic.commodity.application.service.ICommodityApplicationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +23,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CommodityController {
     private final ICommodityApplicationService commodityApplicationService;
+
+    @Operation(summary = "Get Commodity")
+    @GetMapping("/commodity/{commodity-id}")
+    public CommodityGetRespDto getCommodity(@PathVariable("commodity-id") Long commodityId) {
+        return commodityApplicationService.getCommodity(commodityId);
+    }
 
     @Operation(summary = "Query Commodity")
     @PostMapping("/commodity/query")

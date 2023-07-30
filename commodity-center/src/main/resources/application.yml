@@ -14,9 +14,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     default-property-inclusion: non_null
 
-mybatis-plus:
-  mapper-locations: classpath*:mapper/**/*.xml
-
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

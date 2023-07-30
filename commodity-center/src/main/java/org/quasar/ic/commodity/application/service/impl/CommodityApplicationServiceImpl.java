@@ -7,10 +7,7 @@ import org.quasar.ic.api.request.CommodityCreateReqDto;
 import org.quasar.ic.api.request.CommodityDeleteReqDto;
 import org.quasar.ic.api.request.CommodityQueryReqDto;
 import org.quasar.ic.api.request.CommodityUpdateReqDto;
-import org.quasar.ic.api.response.CommodityCreateRespDto;
-import org.quasar.ic.api.response.CommodityDeleteRespDto;
-import org.quasar.ic.api.response.CommodityQueryRespDto;
-import org.quasar.ic.api.response.CommodityUpdateRespDto;
+import org.quasar.ic.api.response.*;
 import org.quasar.ic.commodity.api.converter.CommodityConverter;
 import org.quasar.ic.commodity.application.service.ICommodityApplicationService;
 import org.quasar.ic.commodity.domain.entity.Commodity;
@@ -39,11 +36,18 @@ public class CommodityApplicationServiceImpl implements ICommodityApplicationSer
     private final BasePoPageConverter<CommodityPo, CommodityDto> pageConverter;
 
     @Override
+    public CommodityGetRespDto getCommodity(Long commodityId) {
+        Commodity commodity = commodityFactory.create(commodityId);
+        return new CommodityGetRespDto()
+                .success(commodityConverter.convert(commodity));
+    }
+
+    @Override
     public CommodityQueryRespDto queryCommodity(CommodityQueryReqDto reqDto) {
         Page<CommodityPo> commodityPoPage = commodityQuery.findAll(new ICommodityQuery.CommodityQueryOption(reqDto.getCurrentPage(), reqDto.getPageSize())
                 .setName(reqDto.getName())
-                .setDeliveryTypes(List.of(reqDto.getDeliveryType()))
-                .setStatuses(List.of(reqDto.getStatus()))
+                .setDeliveryTypes(reqDto.getDeliveryType() == null ? null : List.of(reqDto.getDeliveryType()))
+                .setStatuses(reqDto.getStatus() == null ? null : List.of(reqDto.getStatus()))
                 .setStartCreateTime(reqDto.getStartCreateTime())
                 .setEndCreateTime(reqDto.getEndCreateTime()));
 
