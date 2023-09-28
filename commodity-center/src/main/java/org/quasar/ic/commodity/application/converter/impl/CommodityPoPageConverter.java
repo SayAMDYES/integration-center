@@ -5,6 +5,8 @@ import org.quasar.ic.commodity.infrastructure.po.CommodityPo;
 import org.quasar.ic.common.application.converter.BasePoPageConverter;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+
 /**
  * @author Quasar
  * @version 1.0.0
@@ -12,6 +14,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CommodityPoPageConverter extends BasePoPageConverter<CommodityPo, CommodityDto> {
+    private static final String DATABASE_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss.SSSSSS";
+    private static final String API_DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+
     @Override
     protected CommodityDto doConvert(CommodityPo pageItem) {
         return new CommodityDto()
@@ -22,6 +27,18 @@ public class CommodityPoPageConverter extends BasePoPageConverter<CommodityPo, C
                 .setImage(pageItem.getImage())
                 .setStock(pageItem.getStock())
                 .setDeliveryType(pageItem.getDeliveryType())
-                .setStatus(pageItem.getStatus());
+                .setStatus(pageItem.getStatus())
+                .setCreateTime(parseTime(pageItem.getCreateTime()))
+                .setUpdateTime(parseTime(pageItem.getUpdateTime()));
+    }
+
+    private static String parseTime(String dateTime) {
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat(DATABASE_DATE_TIME_PATTERN);
+            SimpleDateFormat outputFormat = new SimpleDateFormat(API_DATE_TIME_PATTERN);
+            return outputFormat.format(inputFormat.parse(dateTime));
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -62,4 +62,16 @@ public class CommodityDto {
      */
     @Schema(description = "commodity status", requiredMode = Schema.RequiredMode.REQUIRED)
     private Integer status;
+
+    /**
+     * commodity create time
+     */
+    @Schema(description = "commodity create time", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String createTime;
+
+    /**
+     * commodity update time
+     */
+    @Schema(description = "commodity update time", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String updateTime;
 }
